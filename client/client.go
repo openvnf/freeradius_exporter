@@ -316,7 +316,7 @@ func (f *FreeRADIUSClient) Stats() ([]prometheus.Metric, error) {
 		}
 
 		if stats.Server.QueueUsePercentage, err = freeradius.GetInt(response, freeradius.QueueUsePercentage); err == nil {
-			allStats = append(allStats, prometheus.MustNewConstMetric(f.metrics["freeradius_queue_use_percentage"], prometheus.GaugeValue, float64(stats.Server.QueuePPSOut), p.address))
+			allStats = append(allStats, prometheus.MustNewConstMetric(f.metrics["freeradius_queue_use_percentage"], prometheus.GaugeValue, float64(stats.Server.QueueUsePercentage), p.address))
 		} else if err != nil && err != radius.ErrNoAttribute {
 			log.Println(err)
 		}
